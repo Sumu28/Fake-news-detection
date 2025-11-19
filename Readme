@@ -5,23 +5,23 @@ It demonstrates how data-driven models can help combat misinformation by automat
 
 ---
 
-## 🚀 Features
-- 🧹 **Text Preprocessing:** Cleaning data (tokenization, stopword removal, stemming/lemmatization)
-- 🔠 **Feature Extraction:** Using TF-IDF or Count Vectorizer to convert text into numerical features
-- 🤖 **Machine Learning Models:** Logistic Regression, Random Forest, Naive Bayes, etc.
-- 📊 **Performance Evaluation:** Accuracy, Precision, Recall, F1-Score, and Confusion Matrix
-- 🧠 **Prediction Interface:** Simple script to input custom news text and classify as Real or Fake
+##  Features
+-  **Text Preprocessing:** Cleaning data (tokenization, stopword removal, stemming/lemmatization)
+-  **Feature Extraction:** Using TF-IDF or Count Vectorizer to convert text into numerical features
+-  **Machine Learning Models:** Logistic Regression, Random Forest, Naive Bayes, etc.
+-  **Performance Evaluation:** Accuracy, Precision, Recall, F1-Score, and Confusion Matrix
+-  **Prediction Interface:** Simple script to input custom news text and classify as Real or Fake
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 - **Programming Language:** Python  
 - **Libraries:** Pandas, NumPy, Scikit-learn, NLTK, Matplotlib  
 - **Dataset:** Kaggle / Publicly Available Fake News Dataset (e.g., `train.csv`, `test.csv`)  
 
 ---
 
-## ⚙️ Workflow
+##  Workflow
 1. Import and explore dataset  
 2. Preprocess text data (cleaning and normalization)  
 3. Vectorize text using TF-IDF  
@@ -41,7 +41,7 @@ It demonstrates how data-driven models can help combat misinformation by automat
 
 ---
 
-## 💡 Key Learnings
+##  Key Learnings
 - Applied **Natural Language Processing** to real-world text data  
 - Understood the impact of feature selection on classification accuracy  
 - Gained experience in **model evaluation metrics** and comparison  
@@ -49,7 +49,7 @@ It demonstrates how data-driven models can help combat misinformation by automat
 
 ---
 
-## 🧠 Future Improvements
+##  Future Improvements
 - Add deep learning models (e.g., LSTM, BERT)  
 - Build a web dashboard for real-time news classification  
 - Deploy model using Flask / Streamlit  
@@ -57,9 +57,9 @@ It demonstrates how data-driven models can help combat misinformation by automat
 ---
 
 ## 🔗 Connect with Me
-👨‍💻 **GitHub:** [Sumu28](https://github.com/Sumu28)  
-💼 **LinkedIn:** [Sumukha Sagar](https://linkedin.com/in/sumukh-s-7bb314265)  
-📧 **Email:** [sumukhssagar@gmail.com](mailto:sumukhssagar@gmail.com)
+ **GitHub:** [Sumu28](https://github.com/Sumu28)  
+ **LinkedIn:** [Sumukha Sagar](https://linkedin.com/in/sumukh-s-7bb314265)  
+ **Email:** [sumukhssagar@gmail.com](mailto:sumukhssagar@gmail.com)
 
 ---
 
