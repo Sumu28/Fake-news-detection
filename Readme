@@ -1,63 +1,108 @@
-# 📰 Fake News Detection using Machine Learning
+# Fake News Detection with Classic Machine Learning
 
-This project focuses on detecting **fake news articles** using **Machine Learning** and **Natural Language Processing (NLP)** techniques.  
-It demonstrates how data-driven models can help combat misinformation by automatically classifying news as *real* or *fake* based on textual content.
+**Can a model tell a real news article from a fake one just by reading the text?**
 
----
-
-##  Features
--  **Text Preprocessing:** Cleaning data (tokenization, stopword removal, stemming/lemmatization)
--  **Feature Extraction:** Using TF-IDF or Count Vectorizer to convert text into numerical features
--  **Machine Learning Models:** Logistic Regression, Random Forest, Naive Bayes, etc.
--  **Performance Evaluation:** Accuracy, Precision, Recall, F1-Score, and Confusion Matrix
--  **Prediction Interface:** Simple script to input custom news text and classify as Real or Fake
+Fake news spreads fast, and nobody can fact-check every article by hand. This notebook tries a straightforward approach: turn each article into numbers using word counts, then train five familiar classifiers to decide whether it is *fake* or *real*, and compare how they do.
 
 ---
 
-##  Tech Stack
-- **Programming Language:** Python  
-- **Libraries:** Pandas, NumPy, Scikit-learn, NLTK, Matplotlib  
-- **Dataset:** Kaggle / Publicly Available Fake News Dataset (e.g., `train.csv`, `test.csv`)  
+## Credits
+
+A team project from our **Machine Learning internship at DevMinds** (October to November 2023, Bengaluru), built by:
+
+- Darshan K
+- Sumukha S
+- Kavya K
+- Lavanya G K
+
+Two helper pieces are adapted from public sources, as noted in the code comments: the word-frequency chart (from a public Kaggle notebook, "Fake News Detector" by rodolfoluna) and the confusion-matrix plotting function (from the scikit-learn documentation).
+
+**My part (Sumukha S):** I wrote the code for the exploratory analysis and for everything after it: the charts and word clouds, the train/test split, the five model pipelines, the confusion matrices and the final comparison. *(If you also wrote the data loading and cleaning steps before the exploration, add that here.)*
 
 ---
 
-##  Workflow
-1. Import and explore dataset  
-2. Preprocess text data (cleaning and normalization)  
-3. Vectorize text using TF-IDF  
-4. Train machine learning models  
-5. Evaluate model performance  
-6. Deploy or use the trained model for real-time predictions  
+## The data
+
+Two CSV files of news articles, one of fake news and one of real news:
+
+| Set | Articles |
+|---|---|
+| Fake | 23,481 |
+| Real | 21,417 |
+| **Total** | **44,898** |
+
+Each article has a title, the body text, a subject (such as politics, world news or left-news) and a date. This looks like the widely used "Fake and Real News" dataset on Kaggle. *(Confirm the source, add the link, and check its licence. Do not upload the CSVs; link to them instead.)*
+
+## What the notebook does
+
+1. **Loads and labels** the two files, joins them, and shuffles the rows.
+2. **Drops** the date and the title, so only the article text is used.
+3. **Cleans the text:** lowercases it, removes punctuation, and removes English stop words such as "the" and "and".
+4. **Explores the data:** articles per subject, the fake/real balance, word clouds, and the 20 most common words in each class.
+5. **Splits** the data 80% for training and 20% for testing.
+6. **Builds a pipeline** for each model: word counts (`CountVectorizer`), then TF-IDF weighting, then the classifier.
+7. **Trains five models** and compares their accuracy with confusion matrices and a bar chart.
+
+## Results
+
+| Model | Test accuracy |
+|---|---|
+| Naive Bayes | 95.27% |
+| Logistic Regression | 98.84% |
+| Random Forest (50 trees) | 99.30% |
+| Linear SVM | 99.44% |
+| Decision Tree (depth 20) | 99.58% |
 
 ---
 
-## 📈 Results
-| Model | Accuracy | Precision | Recall | F1-Score |
-|--------|-----------|------------|---------|-----------|
-| Logistic Regression | 0.93 | 0.92 | 0.93 | 0.93 |
-| Random Forest | 0.91 | 0.90 | 0.91 | 0.91 |
+## How to read these numbers
 
-*(Note: Replace with your actual results once tested)*
+Scores this close to 100% are a warning sign, not a victory. A few reasons to be careful:
+
+- **The real articles carry a giveaway.** Many real articles in this dataset start with a news-agency tag such as "WASHINGTON (Reuters) -". The notebook's own cleaned output still contains the word `reuters` in those articles. A model can score very highly just by learning that one word, without understanding anything about truth. It is notable that a single depth-20 decision tree came out on top.
+- **It learns the style of two sets of sources.** Fake and real articles here come from different publishers with different writing habits and topics, so the model may be recognising the publisher, not the facts.
+- **One random split.** There is no cross-validation, so the 99% figures come from a single train/test division.
+- **Only accuracy is reported.** Confusion matrices are plotted, but precision, recall and F1 are not printed.
+
+So the right summary is: *on this dataset, these models separate these two groups of articles very well. That does not show they can spot fake news in general.*
+
+**How I would test it properly:** remove the "(Reuters)" tags and place names, then retrain. Check which words each model relies on most. And train on one source's articles and test on a different source.
+
+## Known issues
+
+- **The "real news" word cloud is wrong.** The cell for real articles builds the cloud from the fake articles, so both clouds show fake-news words.
+- **The file paths won't work on another computer.** The data is loaded from a personal Windows path (`Users\user\Downloads\...`). Change them to a `data/` folder.
+- **Several steps need packages and downloads:** `wordcloud`, and the NLTK stop-word list.
+
+## Where it could go next
+
+- Remove the source tags and rerun, then compare the scores
+- Report precision, recall and F1, not only accuracy
+- Use cross-validation and tune the models
+- Try word embeddings or a transformer model such as BERT
+- Test on articles from a completely different source
 
 ---
 
-##  Key Learnings
-- Applied **Natural Language Processing** to real-world text data  
-- Understood the impact of feature selection on classification accuracy  
-- Gained experience in **model evaluation metrics** and comparison  
-- Enhanced understanding of how AI can tackle misinformation challenges  
+## Tech stack
 
----
+Python · Pandas · NumPy · scikit-learn · NLTK · WordCloud · Matplotlib · Seaborn · Jupyter Notebook
 
-##  Future Improvements
-- Add deep learning models (e.g., LSTM, BERT)  
-- Build a web dashboard for real-time news classification  
-- Deploy model using Flask / Streamlit  
+## Run it yourself
 
----
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn nltk wordcloud
+```
 
-## 🔗 Connect with Me
- **GitHub:** [Sumu28](https://github.com/Sumu28)  
- **LinkedIn:** [Sumukha Sagar](https://linkedin.com/in/sumukh-s-7bb314265)  
- **Email:** [sumukhssagar@gmail.com](mailto:sumukhssagar@gmail.com)
+1. Download the two CSV files from the dataset link above into a `data/` folder.
+2. Change the two `pd.read_csv(...)` paths in the notebook to `data/Fake.csv` and `data/True.csv` (use your actual file names).
+3. Open the notebook in Jupyter and run the cells in order. The first run downloads the NLTK stop words.
 
+## Authors
+
+Darshan K, Sumukha S, Kavya K and Lavanya G K
+DevMinds Machine Learning internship, 2023
+
+## License
+
+MIT 
